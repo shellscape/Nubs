@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nubs", "Application\Nubs.csproj", "{E4913640-8A5E-4551-99BB-62B481464E88}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Nubs.Hook", "Hook\Nubs.Hooks.vcxproj", "{77DCAD8D-66CD-4707-BE8E-3762C6E7B06B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|Win32 = Debug|Win32
+		Debug|x86 = Debug|x86
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|Win32 = Release|Win32
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4913640-8A5E-4551-99BB-62B481464E88}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{E4913640-8A5E-4551-99BB-62B481464E88}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{E4913640-8A5E-4551-99BB-62B481464E88}.Debug|Win32.ActiveCfg = Debug|x86
+		{E4913640-8A5E-4551-99BB-62B481464E88}.Debug|x86.ActiveCfg = Debug|x86
+		{E4913640-8A5E-4551-99BB-62B481464E88}.Debug|x86.Build.0 = Debug|x86
+		{E4913640-8A5E-4551-99BB-62B481464E88}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{E4913640-8A5E-4551-99BB-62B481464E88}.Release|Mixed Platforms.Build.0 = Release|x86
+		{E4913640-8A5E-4551-99BB-62B481464E88}.Release|Win32.ActiveCfg = Release|x86
+		{E4913640-8A5E-4551-99BB-62B481464E88}.Release|x86.ActiveCfg = Release|x86
+		{E4913640-8A5E-4551-99BB-62B481464E88}.Release|x86.Build.0 = Release|x86
+		{77DCAD8D-66CD-4707-BE8E-3762C6E7B06B}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{77DCAD8D-66CD-4707-BE8E-3762C6E7B06B}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{77DCAD8D-66CD-4707-BE8E-3762C6E7B06B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{77DCAD8D-66CD-4707-BE8E-3762C6E7B06B}.Debug|Win32.Build.0 = Debug|Win32
+		{77DCAD8D-66CD-4707-BE8E-3762C6E7B06B}.Debug|x86.ActiveCfg = Debug|Win32
+		{77DCAD8D-66CD-4707-BE8E-3762C6E7B06B}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{77DCAD8D-66CD-4707-BE8E-3762C6E7B06B}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{77DCAD8D-66CD-4707-BE8E-3762C6E7B06B}.Release|Win32.ActiveCfg = Release|Win32
+		{77DCAD8D-66CD-4707-BE8E-3762C6E7B06B}.Release|Win32.Build.0 = Release|Win32
+		{77DCAD8D-66CD-4707-BE8E-3762C6E7B06B}.Release|x86.ActiveCfg = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
