@@ -1,0 +1,13 @@
+; Nubs.Hook.def - Defines the exports for Nubs.Hook.dll
+
+LIBRARY DLL2
+DESCRIPTION 'Library for assisting with system hooks.'
+
+HEAPSIZE  1024
+
+SECTIONS
+	SHARDATA   Read Write Shared
+
+EXPORTS
+	InstallShellHook
+	UninstallShellHook
