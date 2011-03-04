@@ -81,9 +81,9 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <OutputFile>..\Nubs\bin\Debug\NubHooks.dll</OutputFile>
+      <OutputFile>..\Application\bin\Debug\Nubs.Hook.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ModuleDefinitionFile>.\NubHooks.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>.\Nubs.Hook.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\Debug/NubHooks.pdb</ProgramDatabaseFile>
       <ImportLibrary>.\Debug/NubHooks.lib</ImportLibrary>

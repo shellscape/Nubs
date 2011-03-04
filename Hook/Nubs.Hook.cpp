@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "NubHooks.h"
+#include "Nubs.Hook.h"
 
 // Shared Data
 #pragma data_seg("SHARDATA")
