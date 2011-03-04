@@ -18,6 +18,8 @@ namespace Nubs {
 
 		}
 
+		public static Config Current { get; set; }
+
 		public Boolean EdgeTop { get; set; }
 		public Boolean EdgeRight { get; set; }
 		public Boolean EdgeBottom { get; set; }

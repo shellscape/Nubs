@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
@@ -49,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,13 +70,16 @@
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramArguments.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemotingService.cs" />
     <Compile Include="Resources\Resources.cs" />
     <Compile Include="Themes\ThemeText.cs" />
     <Compile Include="Themes\ThemeImages.cs" />
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeLayout.cs" />
     <Compile Include="Utilities\ThemeHelper.cs" />
+    <Compile Include="WindowManager.cs" />
     <EmbeddedResource Include="Forms\Nub.resx">
       <DependentUpon>Nub.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,8 +109,10 @@
       <Name>Shellscape.Lib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\Icons\" />
+    <Content Include="Resources\Icons\nubs.theme.ico" />
+    <Content Include="Resources\Icons\nubs.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
