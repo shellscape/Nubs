@@ -14,7 +14,9 @@ namespace Nubs.Forms {
 	public partial class Main : Form {
 
 		private WindowManager _windowManager = new WindowManager();
-		
+
+		private Bitmap _buffer = null;
+
 		private static Dictionary<IntPtr, Forms.Nub> _nubs = new Dictionary<IntPtr, Forms.Nub>();
 
 		#region .    Win32    
@@ -111,6 +113,7 @@ namespace Nubs.Forms {
 			}
 
 			nub = new Nub() {
+				WindowEdge = e.Edge,
 				WindowHandle = e.Handle,
 				WindowRect = windowRect,
 				LastWindowRect = e.LastRect.ToRectangle()
@@ -130,6 +133,7 @@ namespace Nubs.Forms {
 
 		}
 
+		
 		
 	}
 }

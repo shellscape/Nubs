@@ -30,7 +30,7 @@ namespace Nubs {
 		public Boolean HideNumberIcon { get; set; }
 		public Boolean FadeWindows { get; set; }
 		public Boolean LoadOnStartup { get; set; }
-		public Boolean NubsOnTop { get; set; }
+		public Boolean NubsTopmost { get; set; }
 		public Boolean ShowWindowFocus { get; set; }
 
 		public int NubDistance { get; set; }

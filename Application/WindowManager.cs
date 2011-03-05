@@ -8,7 +8,18 @@ using System.Windows.Forms;
 
 using Microsoft.VisualBasic.MyServices;
 
+using Nubs.Forms;
+
 namespace Nubs {
+
+	public enum WindowEdge {
+		None,
+		Top,
+		Right,
+		Bottom,
+		Left,
+		Invalid
+	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	public struct RECT {
@@ -28,13 +39,14 @@ namespace Nubs {
 
 		public RECT Rect { get; set; }
 		public RECT LastRect { get; set; }
+		public WindowEdge Edge { get; set; }
 
 	}
 
 	public class WindowManager {
 
 		private Dictionary<IntPtr, RECT> _windows = new Dictionary<IntPtr, RECT>();
-		private Rectangle _screen = SystemInformation.VirtualScreen;
+		private static Rectangle _screen = SystemInformation.VirtualScreen;
 
 		public event EventHandler<WindowEventArgs> WindowActivated;
 		public event EventHandler<WindowEventArgs> WindowDestroyed;
@@ -94,6 +106,8 @@ namespace Nubs {
 		public const int WS_EX_TOOLWINDOW = 0x0080;
 
 		#endregion
+
+		public static Rectangle Screen { get { return _screen; } }
 
 		public void Init() {
 
@@ -184,28 +198,29 @@ namespace Nubs {
 			return result;
 		}
 
-		private Boolean ValidEdge(Rectangle WindowRect) {
+		public WindowEdge ValidateEdge(Rectangle rect) {
 
 			int[] numbers = new int[4];
 			int leftDiff = 0;
 			int rightDiff = 0;
 			int topDiff = 0;
 			int bottomDiff = 0;
+			WindowEdge edge = WindowEdge.None;
 
-			if (WindowRect.Left < _screen.Left) {
-				leftDiff = Math.Abs(_screen.Left - WindowRect.Left);
+			if (rect.Left < _screen.Left) {
+				leftDiff = Math.Abs(_screen.Left - rect.Left);
 			}
 
-			if (WindowRect.Right > _screen.Right) {
-				rightDiff = WindowRect.Right - _screen.Right;
+			if (rect.Right > _screen.Right) {
+				rightDiff = rect.Right - _screen.Right;
 			}
 
-			if (WindowRect.Top < _screen.Top) {
-				topDiff = Math.Abs(_screen.Top - WindowRect.Top);
+			if (rect.Top < _screen.Top) {
+				topDiff = Math.Abs(_screen.Top - rect.Top);
 			}
 
-			if (WindowRect.Bottom > _screen.Bottom) {
-				bottomDiff = WindowRect.Bottom - _screen.Bottom;
+			if (rect.Bottom > _screen.Bottom) {
+				bottomDiff = rect.Bottom - _screen.Bottom;
 			}
 
 			numbers[0] = leftDiff;
@@ -216,40 +231,35 @@ namespace Nubs {
 			Array.Sort(numbers);
 
 			if (numbers[3] == leftDiff) {
-				if (!Config.Current.EdgeLeft) {
-					return false;
+				if (!Config.Current.EdgeLeft || Math.Abs(leftDiff) < Config.Current.NubDistance) {
+					return WindowEdge.Invalid;
 				}
-				if (Math.Abs(leftDiff) < Config.Current.NubDistance) {
-					return false;
-				}
+
+				edge = WindowEdge.Left;
 			}
 			else if (numbers[3] == rightDiff) {
-				if (!Config.Current.EdgeRight) {
-					return false;
+				if (!Config.Current.EdgeRight || Math.Abs(rightDiff) < Config.Current.NubDistance) {
+					return WindowEdge.Invalid;
 				}
-				if (Math.Abs(rightDiff) < Config.Current.NubDistance) {
-					return false;
-				}
+
+				edge = WindowEdge.Right;
 			}
 			else if (numbers[3] == topDiff) {
-				if (!Config.Current.EdgeTop) {
-					return false;
+				if (!Config.Current.EdgeTop || Math.Abs(topDiff) < Config.Current.NubDistance) {
+					return WindowEdge.Invalid;
 				}
-				if (Math.Abs(topDiff) < Config.Current.NubDistance) {
-					return false;
-				}
+
+				edge = WindowEdge.Top;
 			}
 			else if (numbers[3] == bottomDiff) {
-				if (!Config.Current.EdgeBottom) {
-					return false;
+				if (!Config.Current.EdgeBottom || Math.Abs(bottomDiff) < Config.Current.NubDistance) {
+					return WindowEdge.Invalid;
 				}
-				if (Math.Abs(bottomDiff) < Config.Current.NubDistance) {
-					return false;
-				}
+
+				edge = WindowEdge.Bottom;
 			}
 
-			return true;
-
+			return edge;
 		}
 		
 		private void OnWindowActivated(IntPtr hWnd) {
@@ -281,8 +291,9 @@ namespace Nubs {
 			if (r.Left < _screen.Left | r.Top < _screen.Top | r.Right > _screen.Right | r.Bottom > _screen.Bottom) {
 
 				Rectangle windowRect = new Rectangle(r.Left, r.Top, r.Right - r.Left, r.Bottom - r.Top);
+				WindowEdge edge = ValidateEdge(windowRect);
 
-				if (!ValidEdge(windowRect)) {
+				if (edge == WindowEdge.Invalid) {
 					return;
 				}
 
@@ -293,7 +304,7 @@ namespace Nubs {
 						lastRect = _windows[hWnd];
 					}
 
-					WindowNeedsSumNubbin(this, new WindowBoundsEventArgs() { Handle = hWnd, Rect = r, LastRect = lastRect });
+					WindowNeedsSumNubbin(this, new WindowBoundsEventArgs() { Handle = hWnd, Rect = r, LastRect = lastRect, Edge = edge });
 				}
 			}
 			else {
@@ -307,7 +318,7 @@ namespace Nubs {
 					}
 
 					if (WindowMoved != null) {
-						WindowMoved(this, new WindowBoundsEventArgs() { Handle = hWnd, Rect = r });
+						WindowMoved(this, new WindowBoundsEventArgs() { Handle = hWnd, Rect = r, Edge = WindowEdge.None });
 					}
 				}
 			}
